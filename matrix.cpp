@@ -1,60 +1,70 @@
 #include "matrix.h"
 #include <iostream>
-#include <algorithm> // Potrzebne dla std::fill
-#include <stdexcept> // Dla lepszej obsługi błędów (np. std::invalid_argument)
+#include <algorithm> // Potrzebne dla std::fill i std::copy
+#include <stdexcept>
 
+// Istniejące implementacje matrix(void) i matrix(int n) bez zmian
 
 matrix::matrix(void) 
-    : matrix(0) // Domyślny konstruktor deleguje do konstruktora z parametrem 0
+    : matrix(0)
 {
 }
 
-// NOWY KONSTRUKTOR: matrix(int n)
 matrix::matrix(int n) 
 {
     if (n < 0) {
         throw std::invalid_argument("Matrix size must be non-negative.");
     }
     
-    // Używamy nowej metody do alokacji i zerowania
     allocate_exact(n);
     zero_all_cap();
+}
+
+// NOWY KONSTRUKTOR: matrix(int n, int* t)
+matrix::matrix(int n, int* t)
+{
+    // 1. Walidacje
+    if (n < 0) {
+        throw std::invalid_argument("Matrix size must be non-negative.");
+    }
+    if (n > 0 && t == nullptr) {
+        throw std::invalid_argument("Source array pointer (t) cannot be nullptr if size (n) > 0.");
+    }
+    
+    // Jeśli rozmiar jest 0, delegujemy do konstruktora z n=0
+    if (n == 0) {
+        matrix(0);
+        return;
+    }
+
+    // 2. Alokacja pamięci
+    allocate_exact(n);
+
+    // 3. Kopiowanie danych (używamy std::copy)
+    // Kopiujemy n elementów z t do data_.get()
+    std::copy(t, t + n, data_.get());
 }
 
 matrix::~matrix(void) {
 }
 
-// ----------------------------------------------------
-// NOWE FUNKCJE POMOCNICZE
+// Pozostałe funkcje pomocnicze... (bez zmian)
 
-// 1. allocate_exact(n)
 void matrix::allocate_exact(int n) {
     if (n < 0) {
-        // Ta walidacja jest już w konstruktorze, ale dobrze mieć ją tu też
         return; 
     }
     
-    // Alokacja pamięci
     data_ = std::make_unique<int[]>(n);
-    
-    // Ustawienie pól
     n_ = n; 
     cap_ = n;
 }
 
-// 2. zero_all_cap()
 void matrix::zero_all_cap() {
     if (cap_ > 0 && data_) {
-        // Zerowanie całego zaalokowanego bloku pamięci
-        // Używamy std::fill dla bezpieczeństwa i efektywności
         std::fill(data_.get(), data_.get() + cap_, 0); 
     }
 }
-
-
-// ----------------------------------------------------
-// Istniejące funkcje pomocnicze (bez zmian)
-// ...
 
 int matrix::idx(int i) const {
     return i; 

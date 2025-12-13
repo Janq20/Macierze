@@ -6,7 +6,8 @@
 class matrix {
 public:
     matrix(void);
-    matrix(int n); // NOWY KONSTRUKTOR
+    matrix(int n);
+    matrix(int n, int* t);
     ~matrix(void);
 
 private:
@@ -14,7 +15,6 @@ private:
     int cap_; 
     std::unique_ptr<int[]> data_; 
 
-    // NOWE FUNKCJE POMOCNICZE
     void allocate_exact(int n); 
     void zero_all_cap(); 
 
