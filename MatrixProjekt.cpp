@@ -5,8 +5,10 @@ int main() {
     matrix m;
     std::cout << "matrix project: init OK\n";
     
-    // Możesz tu dodać testy, np.
-    // m.require_allocated(); // Spowoduje błąd, ponieważ m jest pusta
-    
+    // Testowanie funkcji pomocniczych (sprawdzą się błędy w konsoli, 
+    // ponieważ macierz jest pusta i niezaalokowana)
+    // m.require_allocated();
+    // m.require_in_bounds(0);
+
     return 0;
 }
