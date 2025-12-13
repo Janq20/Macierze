@@ -1,0 +1,1 @@
+Nie wiem na ile to jest poprawnie szczerze mówiąc, po zrobieniu Doxygen można skasować te komentarze jak coś xD, jakby coś to pisz
