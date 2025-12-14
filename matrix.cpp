@@ -3,6 +3,7 @@
 #include <algorithm> 
 #include <stdexcept>
 
+
 using namespace std;
 matrix::matrix(void)
     : matrix(0)
