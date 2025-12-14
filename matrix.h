@@ -10,13 +10,21 @@ public:
     matrix(int n, int* t);
     ~matrix(void);
 
-private:
-    int n_; 
-    int cap_; 
-    std::unique_ptr<int[]> data_; 
+    // Etap 1: indeksowanie
+    int& at(int i);
+    const int& at(int i) const;
+    int& operator[](int i);
+    int size() const;
+    int capacity() const;
+    void clear();
 
-    void allocate_exact(int n); 
-    void zero_all_cap(); 
+private:
+    int n_;
+    int cap_;
+    std::unique_ptr<int[]> data_;
+
+    void allocate_exact(int n);
+    void zero_all_cap();
 
     int idx(int i) const;
     void require_allocated() const;

@@ -1,25 +1,25 @@
 ﻿#include <iostream>
 #include "matrix.h"
 
+using namespace std;
+
 int main() {
-    // Test 1: matrix()
-    matrix m1; 
+    matrix m1;
+    matrix m2(3);
 
-    // Test 2: matrix(n)
-    matrix m2(3); 
+    int tab[] = { 10, 20, 30, 40 };
+    matrix m3(4, tab);
+    matrix m4(2, tab);
 
-    // Test 3: matrix(n, int* t)
-    int tab[] = {10, 20, 30, 40};
-    matrix m3(4, tab); 
-    
-    // Test 4: matrix(n, int* t) z n=2
-    matrix m4(2, tab); 
+    cout << "ctor tests OK\n";
 
-    std::cout << "Matrix project: all ctors OK\n";
-    
-    // Przykład użycia funkcji pomocniczej (dla m3)
-    // m3.require_in_bounds(3); // OK
-    // m3.require_in_bounds(4); // Wyświetli błąd
+    // Test indeksowania i walidacji
+    m2.at(0) = 5;
+    m2.at(1) = 6;
+    m2[2] = 7;
+    cout << "m2: " << m2.at(0) << "," << m2.at(1) << "," << m2.at(2) << "\n";
+    m2.at(3); 
+    cout << "size=" << m3.size() << " cap=" << m3.capacity() << "\n";
 
     return 0;
 }
