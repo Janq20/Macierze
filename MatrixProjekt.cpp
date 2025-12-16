@@ -9,29 +9,34 @@ int main() {
     srand(static_cast<unsigned int>(time(NULL)));
 
     try {
-        cout << "--- TEST 1: Dodawanie macierzy (A + B) ---" << endl;
-        int t1[] = { 1, 2, 3, 4 };
-        int t2[] = { 10, 10, 20, 20 };
+        cout << "=== TESTY PODSTAWOWE I MATEMATYKA ===" << endl;
+        matrix m1(3);
+        m1.losuj();
+        cout << "Macierz losowa m1:\n" << m1;
 
-        matrix mA(2, t1);
-        matrix mB(2, t2);
+        cout << "m1 + 10:\n" << (m1 + 10);
 
-        cout << "Macierz A:\n" << mA;
-        cout << "Macierz B:\n" << mB;
+        matrix m2 = m1; 
+        cout << "m1 + m2 (dodawanie macierzy):\n" << (m1 + m2);
 
-        mA + mB;
-        cout << "Wynik A + B:\n" << mA;
+        cout << "\n=== TESTY ALGORYTMOW WYPELNIANIA ===" << endl;
 
+        matrix szach(4);
+        cout << "Szachownica:\n" << szach.szachownica();
 
-        cout << "--- TEST 2: Mnozenie macierzy (A * A) ---" << endl;
-        int tX[] = { 1, 2, 3, 4 };
-        matrix mX(2, tX);
-        matrix mKopia = mX;
+        matrix trojkat(4);
+        cout << "Nad przekatna:\n" << trojkat.nad_przekatna();
 
-        cout << "Macierz X:\n" << mX;
+        matrix diag(5);
+        int dane_diag[] = { 1, 2, 3, 4, 5 };
+        cout << "Diagonalna przesunieta (k=1):\n" << diag.diagonalna_k(1, dane_diag);
 
-        mX* mKopia;
-        cout << "Wynik X * X (powinno byc 7, 10, 15, 22):\n" << mX;
+        cout << "\n=== TEST TRANSPOZYCJI ===" << endl;
+        int t[] = { 1, 2, 3, 4 }; 
+        matrix mT(2, t);
+        cout << "Przed transpozycja:\n" << mT;
+        mT.dowroc();
+        cout << "Po transpozycji:\n" << mT;
 
     }
     catch (const exception& e) {
