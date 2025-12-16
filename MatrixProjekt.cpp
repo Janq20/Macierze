@@ -1,34 +1,37 @@
 ﻿#include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "matrix.h"
 #include "matrix.cpp"
 using namespace std;
 
 int main() {
-    try {
-        matrix m1(3);
-        m1.wstaw(0, 0, 10);
-        m1.wstaw(1, 1, 20);
-        m1.wstaw(2, 2, 30);
-        m1.wstaw(0, 2, 5);
+    srand(static_cast<unsigned int>(time(NULL))); 
 
-        cout << "m1:" << endl;
+    try {
+        cout << "--- TEST: Losowanie (calosc) ---" << endl;
+        matrix m1(5);
+        m1.losuj(); 
         cout << m1 << endl;
 
-        int tab[] = { 1, 2, 3, 4 };
-        matrix m2(2, tab);
-        cout << "m2:" << endl;
+        cout << "--- TEST: Operatory matematyczne (+, -, *) ---" << endl;
+        cout << "Dodaje 10:" << endl;
+        m1 + 10;
+        cout << m1 << endl;
+
+        cout << "Mnoze przez 2:" << endl;
+        m1 * 2;
+        cout << m1 << endl;
+
+        cout << "Odejmuje 5:" << endl;
+        m1 - 5;
+        cout << m1 << endl;
+
+        cout << "--- TEST: Losowanie punktowe (3 liczby) ---" << endl;
+        matrix m2(4); 
+        m2.losuj(3);  
         cout << m2 << endl;
 
-        matrix m3 = m1;
-        m3.wstaw(0, 0, 999);
-
-        cout << "m3 (kopia):" << endl;
-        cout << m3 << endl;
-
-        cout << "m1 (oryginal):" << endl;
-        cout << m1 << endl;
-
-        cout << m1.pokaz(5, 5);
     }
     catch (const exception& e) {
         cerr << "Wyjatek: " << e.what() << endl;
