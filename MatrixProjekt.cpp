@@ -1,27 +1,37 @@
-﻿#include <iostream>
+#include <iostream>
 #include "matrix.h"
-
+#include "matrix.cpp"
 using namespace std;
 
 int main() {
     try {
-        matrix m1;
-        matrix m2(3);
+        matrix m1(3);
+        m1.wstaw(0, 0, 10);
+        m1.wstaw(1, 1, 20);
+        m1.wstaw(2, 2, 30);
+        m1.wstaw(0, 2, 5);
 
-        int tab[] = { 10, 20, 30, 40 };
-        matrix m3(4, tab);
+        cout << "m1:" << endl;
+        cout << m1 << endl;
 
-        cout << "Testy konstruktorow OK" << endl;
+        int tab[] = { 1, 2, 3, 4 };
+        matrix m2(2, tab);
+        cout << "m2:" << endl;
+        cout << m2 << endl;
 
-        m2.at(0) = 5;
-        m2.at(1) = 6;
-        m2[2] = 7;
+        matrix m3 = m1;
+        m3.wstaw(0, 0, 999);
 
-        cout << "m2: " << m2.at(0) << ", " << m2.at(1) << ", " << m2.at(2) << endl;
-        cout << "Rozmiar m3: " << m3.size() << " Pojemnosc: " << m3.capacity() << endl;
+        cout << "m3 (kopia):" << endl;
+        cout << m3 << endl;
+
+        cout << "m1 (oryginal):" << endl;
+        cout << m1 << endl;
+
+        cout << m1.pokaz(5, 5);
     }
     catch (const exception& e) {
-        cerr << "Lapanie wyjatku: " << e.what() << endl;
+        cerr << "Wyjatek: " << e.what() << endl;
     }
 
     return 0;

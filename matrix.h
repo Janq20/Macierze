@@ -1,27 +1,26 @@
 #pragma once
 
 #include <iostream>
+#include <memory>
 
 class matrix {
 public:
-    matrix(); 
+    matrix();
     matrix(int n);
     matrix(int n, int* t);
+    matrix(const matrix& m);
     ~matrix();
 
-    int& at(int i);
-    const int& at(int i) const;
-    int& operator[](int i);
+    matrix& alokuj(int n);
+    matrix& wstaw(int x, int y, int wartosc);
+    int pokaz(int x, int y) const;
     int size() const;
-    int capacity() const;
-    void clear();
+
+    friend std::ostream& operator<<(std::ostream& o, const matrix& m);
 
 private:
-    int rozmiar;      
-    int pojemnosc;   
-    int* dane;        
+    int n;
+    std::unique_ptr<int[]> dane;
 
-    void alokuj(int n);
-    void zeruj();
-    void sprawdz_indeks(int i) const;
+    int indeks(int x, int y) const;
 };

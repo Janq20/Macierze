@@ -1,83 +1,83 @@
 #include "matrix.h"
 #include <iostream>
-#include <algorithm> 
+#include <algorithm>
 #include <stdexcept>
+#include <iomanip>
 
 using namespace std;
 
-matrix::matrix() : rozmiar(0), pojemnosc(0), dane(nullptr) {
+matrix::matrix() : n(0), dane(nullptr) {
 }
 
-matrix::matrix(int n) {
-    if (n < 0) {
-        throw invalid_argument("Rozmiar nie moze byc ujemny!");
-    }
+matrix::matrix(int n) : n(0), dane(nullptr) {
+    if (n < 0) throw invalid_argument("Rozmiar ujemny");
     alokuj(n);
-    zeruj();
 }
 
-matrix::matrix(int n, int* t) {
-    if (n < 0) throw invalid_argument("Ujemny rozmiar!");
-    if (n > 0 && t == nullptr) throw invalid_argument("Tablica zrodlowa jest nullem!");
-
-    if (n == 0) {
-        rozmiar = 0;
-        pojemnosc = 0;
-        dane = nullptr;
-        return;
-    }
+matrix::matrix(int n, int* t) : n(0), dane(nullptr) {
+    if (n <= 0) throw invalid_argument("Rozmiar musi byc dodatni");
+    if (t == nullptr) throw invalid_argument("Tablica zrodlowa jest null");
 
     alokuj(n);
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < n * n; ++i) {
         dane[i] = t[i];
     }
 }
 
-matrix::~matrix() {
-    delete[] dane; 
-}
-
-void matrix::alokuj(int n) {
-    dane = new int[n];
-    rozmiar = n;
-    pojemnosc = n;
-}
-
-void matrix::zeruj() {
-    if (dane) {
-        for (int i = 0; i < pojemnosc; i++) dane[i] = 0;
+matrix::matrix(const matrix& m) : n(0), dane(nullptr) {
+    if (m.n > 0) {
+        alokuj(m.n);
+        for (int i = 0; i < n * n; ++i) {
+            dane[i] = m.dane[i];
+        }
     }
 }
 
-int& matrix::at(int i) {
-    sprawdz_indeks(i);
-    return dane[i];
+matrix::~matrix() {
 }
 
-const int& matrix::at(int i) const {
-    sprawdz_indeks(i);
-    return dane[i];
+matrix& matrix::alokuj(int nowe_n) {
+    if (nowe_n < 0) throw invalid_argument("Rozmiar ujemny");
+
+    if (n != nowe_n) {
+        n = nowe_n;
+        if (n > 0) {
+            dane.reset(new int[n * n]());
+        }
+        else {
+            dane.reset();
+        }
+    }
+    return *this;
 }
 
-int& matrix::operator[](int i) {
-    return dane[i]; 
+int matrix::indeks(int x, int y) const {
+    if (x < 0 || x >= n || y < 0 || y >= n) {
+        throw out_of_range("Indeks poza zakresem");
+    }
+    return x * n + y;
+}
+
+matrix& matrix::wstaw(int x, int y, int wartosc) {
+    dane[indeks(x, y)] = wartosc;
+    return *this;
+}
+
+int matrix::pokaz(int x, int y) const {
+    return dane[indeks(x, y)];
 }
 
 int matrix::size() const {
-    return rozmiar;
+    return n;
 }
 
-int matrix::capacity() const {
-    return pojemnosc;
-}
-
-void matrix::clear() {
-    rozmiar = 0; 
-}
-
-void matrix::sprawdz_indeks(int i) const {
-    if (i < 0 || i >= rozmiar) {
-        cerr << "Blad: Indeks " << i << " poza zakresem (0-" << rozmiar - 1 << ")" << endl;
-        throw out_of_range("Indeks poza zakresem");
+ostream& operator<<(ostream& o, const matrix& m) {
+    for (int i = 0; i < m.n; ++i) {
+        o << "| ";
+        for (int j = 0; j < m.n; ++j) {
+            o << setw(4) << m.pokaz(i, j) << " ";
+        }
+        o << "|" << endl;
     }
+    return o;
 }
