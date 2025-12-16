@@ -6,35 +6,41 @@
 using namespace std;
 
 int main() {
-    srand(static_cast<unsigned int>(time(NULL))); 
+    srand(static_cast<unsigned int>(time(NULL)));
 
     try {
-        cout << "--- TEST: Losowanie (calosc) ---" << endl;
-        matrix m1(5);
-        m1.losuj(); 
-        cout << m1 << endl;
+        cout << "=== TESTY PODSTAWOWE I MATEMATYKA ===" << endl;
+        matrix m1(3);
+        m1.losuj();
+        cout << "Macierz losowa m1:\n" << m1;
 
-        cout << "--- TEST: Operatory matematyczne (+, -, *) ---" << endl;
-        cout << "Dodaje 10:" << endl;
-        m1 + 10;
-        cout << m1 << endl;
+        cout << "m1 + 10:\n" << (m1 + 10);
 
-        cout << "Mnoze przez 2:" << endl;
-        m1 * 2;
-        cout << m1 << endl;
+        matrix m2 = m1; 
+        cout << "m1 + m2 (dodawanie macierzy):\n" << (m1 + m2);
 
-        cout << "Odejmuje 5:" << endl;
-        m1 - 5;
-        cout << m1 << endl;
+        cout << "\n=== TESTY ALGORYTMOW WYPELNIANIA ===" << endl;
 
-        cout << "--- TEST: Losowanie punktowe (3 liczby) ---" << endl;
-        matrix m2(4); 
-        m2.losuj(3);  
-        cout << m2 << endl;
+        matrix szach(4);
+        cout << "Szachownica:\n" << szach.szachownica();
+
+        matrix trojkat(4);
+        cout << "Nad przekatna:\n" << trojkat.nad_przekatna();
+
+        matrix diag(5);
+        int dane_diag[] = { 1, 2, 3, 4, 5 };
+        cout << "Diagonalna przesunieta (k=1):\n" << diag.diagonalna_k(1, dane_diag);
+
+        cout << "\n=== TEST TRANSPOZYCJI ===" << endl;
+        int t[] = { 1, 2, 3, 4 }; 
+        matrix mT(2, t);
+        cout << "Przed transpozycja:\n" << mT;
+        mT.dowroc();
+        cout << "Po transpozycji:\n" << mT;
 
     }
     catch (const exception& e) {
-        cerr << "Wyjatek: " << e.what() << endl;
+        cerr << "WYJATEK: " << e.what() << endl;
     }
 
     return 0;

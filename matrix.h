@@ -5,28 +5,54 @@
 
 class matrix {
 public:
-    // Konstruktory i Destruktor
+    // --- Konstruktory i Destruktor ---
     matrix();
     matrix(int n);
     matrix(int n, int* t);
     matrix(const matrix& m);
     ~matrix();
+
+    // --- Zarzadzanie pamiecia ---
     matrix& alokuj(int n);
 
+    // --- Metody operacyjne (Podstawowe) ---
     matrix& wstaw(int x, int y, int wartosc);
     int pokaz(int x, int y) const;
     int size() const;
 
-    matrix& losuj();        
-    matrix& losuj(int x);    
+    // --- Metody Losujace ---
+    matrix& losuj();          
+    matrix& losuj(int x);     
+
+    // --- Algorytmy Wypelniajace i Transpozycja ---
+    matrix& dowroc();                       
+    matrix& szachownica();                 
+
+    matrix& przekatna();                   
+    matrix& pod_przekatna();               
+    matrix& nad_przekatna();               
+
+    matrix& diagonalna(int* t);            
+    matrix& diagonalna_k(int k, int* t);    
+
+    matrix& kolumna(int x, int* t);        
+    matrix& wiersz(int y, int* t);         
+
+    // --- Operatory Matematyczne (Skalarne: Macierz z Liczba) ---
     matrix& operator+(int a);
     matrix& operator-(int a);
     matrix& operator*(int a);
+
+    // --- Operatory Matematyczne (Macierzowe: Macierz z Macierza) ---
+    matrix& operator+(const matrix& m);
+    matrix& operator*(const matrix& m);
+
+    // --- Wypisywanie ---
     friend std::ostream& operator<<(std::ostream& o, const matrix& m);
 
 private:
-    int n;
-    std::unique_ptr<int[]> dane;
+    int n;                          
+    std::unique_ptr<int[]> dane;   
 
     int indeks(int x, int y) const;
 };
