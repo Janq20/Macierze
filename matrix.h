@@ -1,16 +1,14 @@
 #pragma once
 
-#include <memory> 
-#include <stdexcept> 
+#include <iostream>
 
 class matrix {
 public:
-    matrix(void);
+    matrix(); 
     matrix(int n);
     matrix(int n, int* t);
-    ~matrix(void);
+    ~matrix();
 
-    // Etap 1: indeksowanie
     int& at(int i);
     const int& at(int i) const;
     int& operator[](int i);
@@ -19,14 +17,11 @@ public:
     void clear();
 
 private:
-    int n_;
-    int cap_;
-    std::unique_ptr<int[]> data_;
+    int rozmiar;      
+    int pojemnosc;   
+    int* dane;        
 
-    void allocate_exact(int n);
-    void zero_all_cap();
-
-    int idx(int i) const;
-    void require_allocated() const;
-    void require_in_bounds(int i) const;
+    void alokuj(int n);
+    void zeruj();
+    void sprawdz_indeks(int i) const;
 };
