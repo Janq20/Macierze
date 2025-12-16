@@ -3,8 +3,12 @@
 #include <algorithm>
 #include <stdexcept>
 #include <iomanip>
+#include <cstdlib> 
+#include <ctime>   
 
 using namespace std;
+
+// --- Konstruktory ---
 
 matrix::matrix() : n(0), dane(nullptr) {
 }
@@ -36,13 +40,15 @@ matrix::matrix(const matrix& m) : n(0), dane(nullptr) {
 matrix::~matrix() {
 }
 
+// --- Metody pomocnicze ---
+
 matrix& matrix::alokuj(int nowe_n) {
     if (nowe_n < 0) throw invalid_argument("Rozmiar ujemny");
 
     if (n != nowe_n) {
         n = nowe_n;
         if (n > 0) {
-            dane.reset(new int[n * n]());
+            dane.reset(new int[n * n]()); 
         }
         else {
             dane.reset();
@@ -70,6 +76,48 @@ int matrix::pokaz(int x, int y) const {
 int matrix::size() const {
     return n;
 }
+
+// --- Losowanie ---
+
+matrix& matrix::losuj() {
+    for (int i = 0; i < n * n; ++i) {
+        dane[i] = rand() % 10;
+    }
+    return *this;
+}
+
+matrix& matrix::losuj(int x) {
+    for (int k = 0; k < x; ++k) {
+        int losowy_idx = rand() % (n * n);
+        dane[losowy_idx] = rand() % 10;
+    }
+    return *this;
+}
+
+// ---  Operatory matematyczne (skalarne) ---
+
+matrix& matrix::operator+(int a) {
+    for (int i = 0; i < n * n; ++i) {
+        dane[i] += a;
+    }
+    return *this;
+}
+
+matrix& matrix::operator-(int a) {
+    for (int i = 0; i < n * n; ++i) {
+        dane[i] -= a;
+    }
+    return *this;
+}
+
+matrix& matrix::operator*(int a) {
+    for (int i = 0; i < n * n; ++i) {
+        dane[i] *= a;
+    }
+    return *this;
+}
+
+// --- Operator wypisywania ---
 
 ostream& operator<<(ostream& o, const matrix& m) {
     for (int i = 0; i < m.n; ++i) {

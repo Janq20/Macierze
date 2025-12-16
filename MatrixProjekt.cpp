@@ -1,37 +1,41 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "matrix.h"
 #include "matrix.cpp"
 using namespace std;
 
 int main() {
+    srand(static_cast<unsigned int>(time(NULL)));
+
     try {
-        matrix m1(3);
-        m1.wstaw(0, 0, 10);
-        m1.wstaw(1, 1, 20);
-        m1.wstaw(2, 2, 30);
-        m1.wstaw(0, 2, 5);
+        cout << "--- TEST 1: Dodawanie macierzy (A + B) ---" << endl;
+        int t1[] = { 1, 2, 3, 4 };
+        int t2[] = { 10, 10, 20, 20 };
 
-        cout << "m1:" << endl;
-        cout << m1 << endl;
+        matrix mA(2, t1);
+        matrix mB(2, t2);
 
-        int tab[] = { 1, 2, 3, 4 };
-        matrix m2(2, tab);
-        cout << "m2:" << endl;
-        cout << m2 << endl;
+        cout << "Macierz A:\n" << mA;
+        cout << "Macierz B:\n" << mB;
 
-        matrix m3 = m1;
-        m3.wstaw(0, 0, 999);
+        mA + mB;
+        cout << "Wynik A + B:\n" << mA;
 
-        cout << "m3 (kopia):" << endl;
-        cout << m3 << endl;
 
-        cout << "m1 (oryginal):" << endl;
-        cout << m1 << endl;
+        cout << "--- TEST 2: Mnozenie macierzy (A * A) ---" << endl;
+        int tX[] = { 1, 2, 3, 4 };
+        matrix mX(2, tX);
+        matrix mKopia = mX;
 
-        cout << m1.pokaz(5, 5);
+        cout << "Macierz X:\n" << mX;
+
+        mX* mKopia;
+        cout << "Wynik X * X (powinno byc 7, 10, 15, 22):\n" << mX;
+
     }
     catch (const exception& e) {
-        cerr << "Wyjatek: " << e.what() << endl;
+        cerr << "WYJATEK: " << e.what() << endl;
     }
 
     return 0;
