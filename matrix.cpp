@@ -178,7 +178,7 @@ matrix& matrix::wiersz(int y, int* t) {
     return *this;
 }
 
-// ================= OPERATORY SKALARNE =================
+// ================= OPERATORY SKALARNE (Macierz op Liczba) =================
 
 matrix& matrix::operator+(int a) {
     for (int i = 0; i < n * n; ++i) dane[i] += a;
@@ -220,6 +220,93 @@ matrix& matrix::operator*(const matrix& m) {
     for (int i = 0; i < n * n; ++i) dane[i] = wynik[i];
 
     return *this;
+}
+
+// ================= NOWE: PRZYPISANIA ZLOZONE =================
+
+matrix& matrix::operator+=(int a) {
+    for (int i = 0; i < n * n; ++i) dane[i] += a;
+    return *this;
+}
+
+matrix& matrix::operator-=(int a) {
+    for (int i = 0; i < n * n; ++i) dane[i] -= a;
+    return *this;
+}
+
+matrix& matrix::operator*=(int a) {
+    for (int i = 0; i < n * n; ++i) dane[i] *= a;
+    return *this;
+}
+
+// ================= NOWE: INKREMENTACJA/DEKREMENTACJA =================
+
+matrix& matrix::operator++(int) {
+    for (int i = 0; i < n * n; ++i) dane[i]++;
+    return *this;
+}
+
+matrix& matrix::operator--(int) {
+    for (int i = 0; i < n * n; ++i) dane[i]--;
+    return *this;
+}
+
+// ================= NOWE: OPERATOR FUNKCYJNY =================
+
+matrix& matrix::operator()(double a) {
+    int val = static_cast<int>(a);
+    for (int i = 0; i < n * n; ++i) dane[i] += val;
+    return *this;
+}
+
+// ================= NOWE: POROWNANIA =================
+
+bool matrix::operator==(const matrix& m) const {
+    if (n != m.n) return false;
+    for (int i = 0; i < n * n; ++i) {
+        if (dane[i] != m.dane[i]) return false;
+    }
+    return true;
+}
+
+bool matrix::operator>(const matrix& m) const {
+    if (n != m.n) return false;
+    for (int i = 0; i < n * n; ++i) {
+        if (dane[i] <= m.dane[i]) return false;
+    }
+    return true;
+}
+
+bool matrix::operator<(const matrix& m) const {
+    if (n != m.n) return false;
+    for (int i = 0; i < n * n; ++i) {
+        if (dane[i] >= m.dane[i]) return false;
+    }
+    return true;
+}
+
+// ================= NOWE: FUNKCJE FRIEND (Liczba op Macierz) =================
+
+matrix operator+(int a, const matrix& m) {
+    matrix wynik = m; // Kopia
+    wynik + a; // Uzycie metody +
+    return wynik;
+}
+
+matrix operator*(int a, const matrix& m) {
+    matrix wynik = m;
+    wynik* a;
+    return wynik;
+}
+
+matrix operator-(int a, const matrix& m) {
+    // int - Macierz = (a - element)
+    matrix wynik(m.n);
+    for (int i = 0; i < m.n * m.n; ++i) {
+        // Friend ma dostep do private 'dane'
+        wynik.dane[i] = a - m.dane[i];
+    }
+    return wynik;
 }
 
 // ================= WYPISYWANIE =================
