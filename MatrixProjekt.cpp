@@ -2,41 +2,50 @@
 #include <cstdlib>
 #include <ctime>
 #include "matrix.h"
-#include "matrix.cpp"
+#include "matrix.cpp" 
 using namespace std;
 
 int main() {
     srand(static_cast<unsigned int>(time(NULL)));
 
     try {
-        cout << "=== TESTY PODSTAWOWE I MATEMATYKA ===" << endl;
+        cout << "=== TESTY PODSTAWOWE I ALGORYTMY (Stare) ===" << endl;
         matrix m1(3);
         m1.losuj();
-        cout << "Macierz losowa m1:\n" << m1;
-
-        cout << "m1 + 10:\n" << (m1 + 10);
-
-        matrix m2 = m1; 
-        cout << "m1 + m2 (dodawanie macierzy):\n" << (m1 + m2);
-
-        cout << "\n=== TESTY ALGORYTMOW WYPELNIANIA ===" << endl;
+        cout << "Macierz m1:\n" << m1;
 
         matrix szach(4);
-        cout << "Szachownica:\n" << szach.szachownica();
+        szach.szachownica();
+        cout << "Szachownica:\n" << szach;
 
-        matrix trojkat(4);
-        cout << "Nad przekatna:\n" << trojkat.nad_przekatna();
+        cout << "\n=== TESTY NOWE: POROWNANIA ===" << endl;
+        matrix A(2);
+        matrix B(2);
+        A.wstaw(0, 0, 5); B.wstaw(0, 0, 5); 
+        
+        if (A == B) cout << "A == B : TAK (Poprawnie)\n";
+        else        cout << "A == B : NIE (Blad)\n";
 
-        matrix diag(5);
-        int dane_diag[] = { 1, 2, 3, 4, 5 };
-        cout << "Diagonalna przesunieta (k=1):\n" << diag.diagonalna_k(1, dane_diag);
+        B.wstaw(0, 0, 100);
+        if (B > A) cout << "B > A : TAK (Poprawnie)\n";
+        else       cout << "B > A : NIE (Blad)\n";
 
-        cout << "\n=== TEST TRANSPOZYCJI ===" << endl;
-        int t[] = { 1, 2, 3, 4 }; 
-        matrix mT(2, t);
-        cout << "Przed transpozycja:\n" << mT;
-        mT.dowroc();
-        cout << "Po transpozycji:\n" << mT;
+        cout << "\n=== TESTY NOWE: OPERATORY INKREMENTACJI I FUNKCYJNE ===" << endl;
+        matrix C(2);
+        cout << "C przed ++ (same zera):\n" << C;
+        C++; 
+        cout << "C po ++ (same jedynki):\n" << C;
+
+        C += 10;
+        cout << "C po += 10 (same 11):\n" << C;
+
+        cout << "C(2.5) - dodaje czesc calkowita (2):\n";
+        C(2.5);
+        cout << C; 
+
+        cout << "\n=== TESTY NOWE: FRIEND (int - Macierz) ===" << endl;
+        matrix D = 20 - C;
+        cout << "Wynik 20 - C:\n" << D;
 
     }
     catch (const exception& e) {
