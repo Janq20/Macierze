@@ -9,9 +9,9 @@
 using namespace std;
 
 /**
- * @brief Konstruktor domyœlny.
+ * @brief Konstruktor domyÅ›lny.
  *
- * Inicjalizuje pust¹ macierz:
+ * Inicjalizuje pustÄ… macierz:
  * - n = 0
  * - pojemnosc = 0
  * - dane = nullptr
@@ -22,10 +22,10 @@ matrix::matrix() : n(0), pojemnosc(0), dane(nullptr) {
 /**
  * @brief Konstruktor z rozmiarem.
  *
- * Tworzy macierz @p n x @p n i wywo³uje @ref matrix::alokuj "alokuj(n)".
+ * Tworzy macierz @p n x @p n i wywoÅ‚uje @ref matrix::alokuj "alokuj(n)".
  *
  * @param n Rozmiar macierzy.
- * @throw std::invalid_argument jeœli @p n < 0.
+ * @throw std::invalid_argument jeÅ›li @p n < 0.
  */
 matrix::matrix(int n) : n(0), pojemnosc(0), dane(nullptr) {
     if (n < 0) throw invalid_argument("Rozmiar ujemny");
@@ -33,13 +33,13 @@ matrix::matrix(int n) : n(0), pojemnosc(0), dane(nullptr) {
 }
 
 /**
- * @brief Konstruktor z rozmiarem i tablic¹ danych.
+ * @brief Konstruktor z rozmiarem i tablicÄ… danych.
  *
- * Tworzy macierz @p n x @p n oraz kopiuje @p n*n elementów z tablicy @p t.
+ * Tworzy macierz @p n x @p n oraz kopiuje @p n*n elementÃ³w z tablicy @p t.
  *
  * @param n Rozmiar macierzy.
- * @param t WskaŸnik na tablicê o rozmiarze co najmniej @p n*@p n.
- * @throw std::invalid_argument jeœli @p n <= 0 lub @p t == nullptr.
+ * @param t WskaÅºnik na tablicÄ™ o rozmiarze co najmniej @p n*@p n.
+ * @throw std::invalid_argument jeÅ›li @p n <= 0 lub @p t == nullptr.
  */
 matrix::matrix(int n, int* t) : n(0), pojemnosc(0), dane(nullptr) {
     if (n <= 0) throw invalid_argument("Rozmiar musi byc dodatni");
@@ -52,11 +52,11 @@ matrix::matrix(int n, int* t) : n(0), pojemnosc(0), dane(nullptr) {
 }
 
 /**
- * @brief Konstruktor kopiuj¹cy.
+ * @brief Konstruktor kopiujÄ…cy.
  *
- * Alokuje now¹ pamiêæ i kopiuje dane z macierzy @p m.
+ * Alokuje nowÄ… pamiÄ™Ä‡ i kopiuje dane z macierzy @p m.
  *
- * @param m Macierz Ÿród³owa.
+ * @param m Macierz ÅºrÃ³dÅ‚owa.
  */
 matrix::matrix(const matrix& m) : n(0), pojemnosc(0), dane(nullptr) {
     if (m.n > 0) {
@@ -70,7 +70,7 @@ matrix::matrix(const matrix& m) : n(0), pojemnosc(0), dane(nullptr) {
 /**
  * @brief Destruktor.
  *
- * Pamiêæ zwalnia siê automatycznie dziêki std::unique_ptr.
+ * PamiÄ™Ä‡ zwalnia siÄ™ automatycznie dziÄ™ki std::unique_ptr.
  */
 matrix::~matrix() {
 }
@@ -78,9 +78,9 @@ matrix::~matrix() {
 /**
  * @brief Operator przypisania.
  *
- * Kopiuje rozmiar i zawartoœæ macierzy @p m do *this.
+ * Kopiuje rozmiar i zawartoÅ›Ä‡ macierzy @p m do *this.
  *
- * @param m Macierz Ÿród³owa.
+ * @param m Macierz ÅºrÃ³dÅ‚owa.
  * @return Referencja do *this.
  */
 matrix& matrix::operator=(const matrix& m) {
@@ -95,15 +95,15 @@ matrix& matrix::operator=(const matrix& m) {
 }
 
 /**
- * @brief Alokuje/realokuje pamiêæ dla macierzy.
+ * @brief Alokuje/realokuje pamiÄ™Ä‡ dla macierzy.
  *
- * Je¿eli @p nowe_n*@p nowe_n jest wiêksze ni¿ aktualna pojemnoœæ,
+ * JeÅ¼eli @p nowe_n*@p nowe_n jest wiÄ™ksze niÅ¼ aktualna pojemnoÅ›Ä‡,
  * alokowana jest nowa tablica (wyzerowana). W przeciwnym razie
- * tylko zmienia siê rozmiar @p n.
+ * tylko zmienia siÄ™ rozmiar @p n.
  *
  * @param nowe_n Nowy rozmiar macierzy.
  * @return Referencja do *this.
- * @throw std::invalid_argument jeœli @p nowe_n < 0.
+ * @throw std::invalid_argument jeÅ›li @p nowe_n < 0.
  */
 matrix& matrix::alokuj(int nowe_n) {
     if (nowe_n < 0) throw invalid_argument("Rozmiar ujemny");
@@ -124,7 +124,7 @@ matrix& matrix::alokuj(int nowe_n) {
  * @param x Indeks wiersza.
  * @param y Indeks kolumny.
  * @return Indeks w jednowymiarowej tablicy @c dane.
- * @throw std::out_of_range jeœli indeksy s¹ poza zakresem 0..n-1.
+ * @throw std::out_of_range jeÅ›li indeksy sÄ… poza zakresem 0..n-1.
  */
 int matrix::indeks(int x, int y) const {
     if (x < 0 || x >= n || y < 0 || y >= n) {
@@ -134,13 +134,13 @@ int matrix::indeks(int x, int y) const {
 }
 
 /**
- * @brief Wstawia wartoœæ do komórki (x, y).
+ * @brief Wstawia wartoÅ›Ä‡ do komÃ³rki (x, y).
  *
  * @param x Indeks wiersza.
  * @param y Indeks kolumny.
- * @param wartosc Wstawiana wartoœæ.
+ * @param wartosc Wstawiana wartoÅ›Ä‡.
  * @return Referencja do *this.
- * @throw std::out_of_range jeœli indeksy s¹ nieprawid³owe.
+ * @throw std::out_of_range jeÅ›li indeksy sÄ… nieprawidÅ‚owe.
  */
 matrix& matrix::wstaw(int x, int y, int wartosc) {
     dane[indeks(x, y)] = wartosc;
@@ -148,12 +148,12 @@ matrix& matrix::wstaw(int x, int y, int wartosc) {
 }
 
 /**
- * @brief Zwraca wartoœæ w komórce (x, y).
+ * @brief Zwraca wartoÅ›Ä‡ w komÃ³rce (x, y).
  *
  * @param x Indeks wiersza.
  * @param y Indeks kolumny.
- * @return Wartoœæ w danym miejscu.
- * @throw std::out_of_range jeœli indeksy s¹ nieprawid³owe.
+ * @return WartoÅ›Ä‡ w danym miejscu.
+ * @throw std::out_of_range jeÅ›li indeksy sÄ… nieprawidÅ‚owe.
  */
 int matrix::pokaz(int x, int y) const {
     return dane[indeks(x, y)];
@@ -169,16 +169,16 @@ int matrix::size() const {
 }
 
 /**
- * @brief Zwraca pojemnoœæ zaalokowanej tablicy.
+ * @brief Zwraca pojemnoÅ›Ä‡ zaalokowanej tablicy.
  *
- * @return Liczba elementów, na jak¹ jest zaalokowana tablica @c dane.
+ * @return Liczba elementÃ³w, na jakÄ… jest zaalokowana tablica @c dane.
  */
 int matrix::capacity() const {
     return pojemnosc;
 }
 
 /**
- * @brief Losowo wype³nia ca³¹ macierz wartoœciami 0..9.
+ * @brief Losowo wypeÅ‚nia caÅ‚Ä… macierz wartoÅ›ciami 0..9.
  *
  * @return Referencja do *this.
  */
@@ -190,9 +190,9 @@ matrix& matrix::losuj() {
 }
 
 /**
- * @brief Losowo modyfikuje @p x elementów macierzy.
+ * @brief Losowo modyfikuje @p x elementÃ³w macierzy.
  *
- * W ka¿dej iteracji losowany jest indeks i wstawiana wartoœæ 0..9.
+ * W kaÅ¼dej iteracji losowany jest indeks i wstawiana wartoÅ›Ä‡ 0..9.
  *
  * @param x Liczba modyfikacji.
  * @return Referencja do *this.
@@ -208,7 +208,7 @@ matrix& matrix::losuj(int x) {
 /**
  * @brief Transponuje macierz (zamienia wiersze z kolumnami).
  *
- * Tworzy pomocnicz¹ macierz @c temp o tym samym rozmiarze
+ * Tworzy pomocniczÄ… macierz @c temp o tym samym rozmiarze
  * i przepisuje elementy na pozycje (j,i).
  *
  * @return Referencja do *this.
@@ -225,7 +225,7 @@ matrix& matrix::dowroc() {
 }
 
 /**
- * @brief Wype³nia macierz wzorem szachownicy.
+ * @brief WypeÅ‚nia macierz wzorem szachownicy.
  *
  * Element (i, j) = (i + j) % 2.
  *
@@ -241,9 +241,9 @@ matrix& matrix::szachownica() {
 }
 
 /**
- * @brief Tworzy macierz jednostkow¹.
+ * @brief Tworzy macierz jednostkowÄ….
  *
- * Zeruje wszystkie elementy, a na g³ównej przek¹tnej ustawia 1.
+ * Zeruje wszystkie elementy, a na gÅ‚Ã³wnej przekÄ…tnej ustawia 1.
  *
  * @return Referencja do *this.
  */
@@ -257,9 +257,9 @@ matrix& matrix::przekatna() {
 }
 
 /**
- * @brief Ustawia elementy pod g³ówn¹ przek¹tn¹ na 1, pozosta³e na 0.
+ * @brief Ustawia elementy pod gÅ‚Ã³wnÄ… przekÄ…tnÄ… na 1, pozostaÅ‚e na 0.
  *
- * Element (i, j) = 1, jeœli i > j, w przeciwnym razie 0.
+ * Element (i, j) = 1, jeÅ›li i > j, w przeciwnym razie 0.
  *
  * @return Referencja do *this.
  */
@@ -273,9 +273,9 @@ matrix& matrix::pod_przekatna() {
 }
 
 /**
- * @brief Ustawia elementy nad g³ówn¹ przek¹tn¹ na 1, pozosta³e na 0.
+ * @brief Ustawia elementy nad gÅ‚Ã³wnÄ… przekÄ…tnÄ… na 1, pozostaÅ‚e na 0.
  *
- * Element (i, j) = 1, jeœli j > i, w przeciwnym razie 0.
+ * Element (i, j) = 1, jeÅ›li j > i, w przeciwnym razie 0.
  *
  * @return Referencja do *this.
  */
@@ -289,12 +289,12 @@ matrix& matrix::nad_przekatna() {
 }
 
 /**
- * @brief Ustawia przek¹tn¹ g³ówn¹ zgodnie z tablic¹ @p t.
+ * @brief Ustawia przekÄ…tnÄ… gÅ‚Ã³wnÄ… zgodnie z tablicÄ… @p t.
  *
- * Ca³a macierz jest wczeœniej zerowana. Jeœli @p t == nullptr
- * metoda nie wykonuje ¿adnych zmian.
+ * CaÅ‚a macierz jest wczeÅ›niej zerowana. JeÅ›li @p t == nullptr
+ * metoda nie wykonuje Å¼adnych zmian.
  *
- * @param t Tablica wartoœci przek¹tnej (o d³ugoœci co najmniej @c n).
+ * @param t Tablica wartoÅ›ci przekÄ…tnej (o dÅ‚ugoÅ›ci co najmniej @c n).
  * @return Referencja do *this.
  */
 matrix& matrix::diagonalna(int* t) {
@@ -306,14 +306,14 @@ matrix& matrix::diagonalna(int* t) {
 }
 
 /**
- * @brief Ustawia przek¹tn¹ przesuniêt¹ o @p k zgodnie z tablic¹ @p t.
+ * @brief Ustawia przekÄ…tnÄ… przesuniÄ™tÄ… o @p k zgodnie z tablicÄ… @p t.
  *
- * Ca³a macierz jest wczeœniej zerowana:
- *  - jeœli @p k >= 0, ustawiana jest przek¹tna powy¿ej (lub równa) g³ównej,
- *  - jeœli @p k < 0, ustawiana jest przek¹tna poni¿ej g³ównej.
+ * CaÅ‚a macierz jest wczeÅ›niej zerowana:
+ *  - jeÅ›li @p k >= 0, ustawiana jest przekÄ…tna powyÅ¼ej (lub rÃ³wna) gÅ‚Ã³wnej,
+ *  - jeÅ›li @p k < 0, ustawiana jest przekÄ…tna poniÅ¼ej gÅ‚Ã³wnej.
  *
- * @param k Przesuniêcie przek¹tnej wzglêdem g³ównej.
- * @param t Tablica wartoœci przek¹tnej.
+ * @param k PrzesuniÄ™cie przekÄ…tnej wzglÄ™dem gÅ‚Ã³wnej.
+ * @param t Tablica wartoÅ›ci przekÄ…tnej.
  * @return Referencja do *this.
  */
 matrix& matrix::diagonalna_k(int k, int* t) {
@@ -330,12 +330,12 @@ matrix& matrix::diagonalna_k(int k, int* t) {
 }
 
 /**
- * @brief Ustawia wartoœci w kolumnie @p x wed³ug tablicy @p t.
+ * @brief Ustawia wartoÅ›ci w kolumnie @p x wedÅ‚ug tablicy @p t.
  *
  * @param x Indeks kolumny (0..n-1).
- * @param t Tablica wartoœci o d³ugoœci co najmniej @c n.
+ * @param t Tablica wartoÅ›ci o dÅ‚ugoÅ›ci co najmniej @c n.
  * @return Referencja do *this.
- * @throw std::out_of_range jeœli @p x jest poza zakresem.
+ * @throw std::out_of_range jeÅ›li @p x jest poza zakresem.
  */
 matrix& matrix::kolumna(int x, int* t) {
     if (t == nullptr) return *this;
@@ -345,12 +345,12 @@ matrix& matrix::kolumna(int x, int* t) {
 }
 
 /**
- * @brief Ustawia wartoœci w wierszu @p y wed³ug tablicy @p t.
+ * @brief Ustawia wartoÅ›ci w wierszu @p y wedÅ‚ug tablicy @p t.
  *
  * @param y Indeks wiersza (0..n-1).
- * @param t Tablica wartoœci o d³ugoœci co najmniej @c n.
+ * @param t Tablica wartoÅ›ci o dÅ‚ugoÅ›ci co najmniej @c n.
  * @return Referencja do *this.
- * @throw std::out_of_range jeœli @p y jest poza zakresem.
+ * @throw std::out_of_range jeÅ›li @p y jest poza zakresem.
  */
 matrix& matrix::wiersz(int y, int* t) {
     if (t == nullptr) return *this;
@@ -360,9 +360,9 @@ matrix& matrix::wiersz(int y, int* t) {
 }
 
 /**
- * @brief Dodaje sta³¹ @p a do wszystkich elementów macierzy (in-place).
+ * @brief Dodaje staÅ‚Ä… @p a do wszystkich elementÃ³w macierzy (in-place).
  *
- * @param a Dodawana wartoœæ.
+ * @param a Dodawana wartoÅ›Ä‡.
  * @return Referencja do *this.
  */
 matrix& matrix::operator+(int a) {
@@ -371,9 +371,9 @@ matrix& matrix::operator+(int a) {
 }
 
 /**
- * @brief Odejmuje sta³¹ @p a od wszystkich elementów macierzy (in-place).
+ * @brief Odejmuje staÅ‚Ä… @p a od wszystkich elementÃ³w macierzy (in-place).
  *
- * @param a Odejmowana wartoœæ.
+ * @param a Odejmowana wartoÅ›Ä‡.
  * @return Referencja do *this.
  */
 matrix& matrix::operator-(int a) {
@@ -382,9 +382,9 @@ matrix& matrix::operator-(int a) {
 }
 
 /**
- * @brief Mno¿y wszystkie elementy macierzy przez sta³¹ @p a (in-place).
+ * @brief MnoÅ¼y wszystkie elementy macierzy przez staÅ‚Ä… @p a (in-place).
  *
- * @param a Mno¿nik.
+ * @param a MnoÅ¼nik.
  * @return Referencja do *this.
  */
 matrix& matrix::operator*(int a) {
@@ -393,11 +393,11 @@ matrix& matrix::operator*(int a) {
 }
 
 /**
- * @brief Dodaje do macierzy inn¹ macierz (element po elemencie, in-place).
+ * @brief Dodaje do macierzy innÄ… macierz (element po elemencie, in-place).
  *
  * @param m Macierz dodawana.
  * @return Referencja do *this.
- * @throw std::invalid_argument jeœli rozmiary s¹ ró¿ne.
+ * @throw std::invalid_argument jeÅ›li rozmiary sÄ… rÃ³Å¼ne.
  */
 matrix& matrix::operator+(const matrix& m) {
     if (n != m.n) throw invalid_argument("Rozne wymiary macierzy!");
@@ -406,14 +406,14 @@ matrix& matrix::operator+(const matrix& m) {
 }
 
 /**
- * @brief Mno¿y macierz przez inn¹ macierz (mno¿enie macierzowe, in-place).
+ * @brief MnoÅ¼y macierz przez innÄ… macierz (mnoÅ¼enie macierzowe, in-place).
  *
- * Wynik przechowywany jest w pomocniczej tablicy, a nastêpnie
+ * Wynik przechowywany jest w pomocniczej tablicy, a nastÄ™pnie
  * kopiowany do @c dane.
  *
  * @param m Drugi czynnik.
  * @return Referencja do *this (zawiera wynik).
- * @throw std::invalid_argument jeœli rozmiary s¹ ró¿ne.
+ * @throw std::invalid_argument jeÅ›li rozmiary sÄ… rÃ³Å¼ne.
  */
 matrix& matrix::operator*(const matrix& m) {
     if (n != m.n) throw invalid_argument("Rozne wymiary macierzy!");
@@ -434,11 +434,11 @@ matrix& matrix::operator*(const matrix& m) {
 }
 
 /**
- * @brief Dodaje sta³¹ @p a do macierzy (operator przypisania).
+ * @brief Dodaje staÅ‚Ä… @p a do macierzy (operator przypisania).
  *
- * Równowa¿ne wywo³aniu @ref matrix::operator+ "(a)".
+ * RÃ³wnowaÅ¼ne wywoÅ‚aniu @ref matrix::operator+ "(a)".
  *
- * @param a Dodawana wartoœæ.
+ * @param a Dodawana wartoÅ›Ä‡.
  * @return Referencja do *this.
  */
 matrix& matrix::operator+=(int a) {
@@ -446,11 +446,11 @@ matrix& matrix::operator+=(int a) {
 }
 
 /**
- * @brief Odejmuje sta³¹ @p a od macierzy (operator przypisania).
+ * @brief Odejmuje staÅ‚Ä… @p a od macierzy (operator przypisania).
  *
- * Równowa¿ne wywo³aniu @ref matrix::operator- "(a)".
+ * RÃ³wnowaÅ¼ne wywoÅ‚aniu @ref matrix::operator- "(a)".
  *
- * @param a Odejmowana wartoœæ.
+ * @param a Odejmowana wartoÅ›Ä‡.
  * @return Referencja do *this.
  */
 matrix& matrix::operator-=(int a) {
@@ -458,11 +458,11 @@ matrix& matrix::operator-=(int a) {
 }
 
 /**
- * @brief Mno¿y macierz przez sta³¹ @p a (operator przypisania).
+ * @brief MnoÅ¼y macierz przez staÅ‚Ä… @p a (operator przypisania).
  *
- * Równowa¿ne wywo³aniu @ref matrix::operator* "(a)".
+ * RÃ³wnowaÅ¼ne wywoÅ‚aniu @ref matrix::operator* "(a)".
  *
- * @param a Mno¿nik.
+ * @param a MnoÅ¼nik.
  * @return Referencja do *this.
  */
 matrix& matrix::operator*=(int a) {
@@ -470,10 +470,10 @@ matrix& matrix::operator*=(int a) {
 }
 
 /**
- * @brief Postinkrementacja (m++) – zwiêksza ka¿dy element o 1.
+ * @brief Postinkrementacja (m++) â€“ zwiÄ™ksza kaÅ¼dy element o 1.
  *
- * @param dummy Nie u¿ywany; wymagany przez sk³adniê postinkrementacji.
- * @return Referencja do *this po zwiêkszeniu elementów.
+ * @param dummy Nie uÅ¼ywany; wymagany przez skÅ‚adniÄ™ postinkrementacji.
+ * @return Referencja do *this po zwiÄ™kszeniu elementÃ³w.
  */
 matrix& matrix::operator++(int) {
     for (int i = 0; i < n * n; ++i) dane[i]++;
@@ -481,10 +481,10 @@ matrix& matrix::operator++(int) {
 }
 
 /**
- * @brief Postdekrementacja (m--) – zmniejsza ka¿dy element o 1.
+ * @brief Postdekrementacja (m--) â€“ zmniejsza kaÅ¼dy element o 1.
  *
- * @param dummy Nie u¿ywany; wymagany przez sk³adniê postdekrementacji.
- * @return Referencja do *this po zmniejszeniu elementów.
+ * @param dummy Nie uÅ¼ywany; wymagany przez skÅ‚adniÄ™ postdekrementacji.
+ * @return Referencja do *this po zmniejszeniu elementÃ³w.
  */
 matrix& matrix::operator--(int) {
     for (int i = 0; i < n * n; ++i) dane[i]--;
@@ -492,9 +492,9 @@ matrix& matrix::operator--(int) {
 }
 
 /**
- * @brief Operator funkcyjny – dodaje do wszystkich elementów wartoœæ @p a (rzutowan¹ na int).
+ * @brief Operator funkcyjny â€“ dodaje do wszystkich elementÃ³w wartoÅ›Ä‡ @p a (rzutowanÄ… na int).
  *
- * @param a Wartoœæ typu double, rzutowana na int.
+ * @param a WartoÅ›Ä‡ typu double, rzutowana na int.
  * @return Referencja do *this.
  */
 matrix& matrix::operator()(double a) {
@@ -504,13 +504,13 @@ matrix& matrix::operator()(double a) {
 }
 
 /**
- * @brief Sprawdza równoœæ dwóch macierzy.
+ * @brief Sprawdza rÃ³wnoÅ›Ä‡ dwÃ³ch macierzy.
  *
- * Macierze s¹ równe, jeœli rozmiary s¹ takie same
- * i wszystkie odpowiadaj¹ce sobie elementy s¹ identyczne.
+ * Macierze sÄ… rÃ³wne, jeÅ›li rozmiary sÄ… takie same
+ * i wszystkie odpowiadajÄ…ce sobie elementy sÄ… identyczne.
  *
- * @param m Macierz porównywana.
- * @return true jeœli macierze s¹ równe, w przeciwnym razie false.
+ * @param m Macierz porÃ³wnywana.
+ * @return true jeÅ›li macierze sÄ… rÃ³wne, w przeciwnym razie false.
  */
 bool matrix::operator==(const matrix& m) const {
     if (n != m.n) return false;
@@ -521,13 +521,13 @@ bool matrix::operator==(const matrix& m) const {
 }
 
 /**
- * @brief Porównanie "wiêkszy ni¿".
+ * @brief PorÃ³wnanie "wiÄ™kszy niÅ¼".
  *
- * Zwraca true, jeœli wszystkie elementy *this s¹ wiêksze
- * od odpowiadaj¹cych im elementów @p m, a rozmiary s¹ równe.
+ * Zwraca true, jeÅ›li wszystkie elementy *this sÄ… wiÄ™ksze
+ * od odpowiadajÄ…cych im elementÃ³w @p m, a rozmiary sÄ… rÃ³wne.
  *
- * @param m Macierz porównywana.
- * @return true jeœli *this > m, w przeciwnym razie false.
+ * @param m Macierz porÃ³wnywana.
+ * @return true jeÅ›li *this > m, w przeciwnym razie false.
  */
 bool matrix::operator>(const matrix& m) const {
     if (n != m.n) return false;
@@ -538,13 +538,13 @@ bool matrix::operator>(const matrix& m) const {
 }
 
 /**
- * @brief Porównanie "mniejszy ni¿".
+ * @brief PorÃ³wnanie "mniejszy niÅ¼".
  *
- * Zwraca true, jeœli wszystkie elementy *this s¹ mniejsze
- * od odpowiadaj¹cych im elementów @p m, a rozmiary s¹ równe.
+ * Zwraca true, jeÅ›li wszystkie elementy *this sÄ… mniejsze
+ * od odpowiadajÄ…cych im elementÃ³w @p m, a rozmiary sÄ… rÃ³wne.
  *
- * @param m Macierz porównywana.
- * @return true jeœli *this < m, w przeciwnym razie false.
+ * @param m Macierz porÃ³wnywana.
+ * @return true jeÅ›li *this < m, w przeciwnym razie false.
  */
 bool matrix::operator<(const matrix& m) const {
     if (n != m.n) return false;
@@ -557,11 +557,11 @@ bool matrix::operator<(const matrix& m) const {
 /**
  * @brief Dodawanie skalaru z lewej strony: a + m.
  *
- * Tworzy kopiê macierzy @p m, dodaje do niej @p a i zwraca wynik.
+ * Tworzy kopiÄ™ macierzy @p m, dodaje do niej @p a i zwraca wynik.
  *
  * @param a Skalar.
  * @param m Macierz.
- * @return Nowa macierz zawieraj¹ca wynik.
+ * @return Nowa macierz zawierajÄ…ca wynik.
  */
 matrix operator+(int a, const matrix& m) {
     matrix wynik = m;
@@ -570,13 +570,13 @@ matrix operator+(int a, const matrix& m) {
 }
 
 /**
- * @brief Mno¿enie skalaru przez macierz: a * m.
+ * @brief MnoÅ¼enie skalaru przez macierz: a * m.
  *
- * Tworzy kopiê macierzy @p m, mno¿y ka¿dy element przez @p a i zwraca wynik.
+ * Tworzy kopiÄ™ macierzy @p m, mnoÅ¼y kaÅ¼dy element przez @p a i zwraca wynik.
  *
  * @param a Skalar.
  * @param m Macierz.
- * @return Nowa macierz zawieraj¹ca wynik.
+ * @return Nowa macierz zawierajÄ…ca wynik.
  */
 matrix operator*(int a, const matrix& m) {
     matrix wynik = m;
@@ -587,12 +587,12 @@ matrix operator*(int a, const matrix& m) {
 /**
  * @brief Odejmowanie macierzy od skalaru: a - m.
  *
- * Tworzy now¹ macierz tego samego rozmiaru co @p m,
- * gdzie ka¿dy element jest równy (a - m[i]).
+ * Tworzy nowÄ… macierz tego samego rozmiaru co @p m,
+ * gdzie kaÅ¼dy element jest rÃ³wny (a - m[i]).
  *
  * @param a Skalar.
  * @param m Macierz.
- * @return Nowa macierz zawieraj¹ca wynik.
+ * @return Nowa macierz zawierajÄ…ca wynik.
  */
 matrix operator-(int a, const matrix& m) {
     matrix wynik(m.n);
@@ -603,14 +603,14 @@ matrix operator-(int a, const matrix& m) {
 }
 
 /**
- * @brief Wypisuje macierz na strumieñ w czytelnym formacie.
+ * @brief Wypisuje macierz na strumieÅ„ w czytelnym formacie.
  *
- * Ka¿dy wiersz ma postaæ:
+ * KaÅ¼dy wiersz ma postaÄ‡:
  * @code
  * |    a    b    c |
  * @endcode
  *
- * @param o Strumieñ wyjœciowy.
+ * @param o StrumieÅ„ wyjÅ›ciowy.
  * @param m Macierz do wypisania.
  * @return Referencja do strumienia @p o.
  */
